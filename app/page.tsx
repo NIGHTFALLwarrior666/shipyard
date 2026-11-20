@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ProductCard from "./components/ProductCard";
 import { products } from "./data/products";
+
+export const metadata: Metadata = {
+  title: "Shop the Collection | ShipYard",
+  description: "Shop eight thoughtfully selected sneakers, headphones, smart wearables, and tech accessories in the ShipYard catalog.",
+  openGraph: { title: "ShipYard | Curated Everyday Gear", description: "Eight essentials. Four categories. Find your next favorite." },
+};
 
 export default function HomePage() {
   return (

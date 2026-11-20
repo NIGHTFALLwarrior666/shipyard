@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "../data/products";
 
@@ -8,7 +9,14 @@ export default function ProductCard({ product }: ProductCardProps) {
     <Link className="product-card" href={`/products/${product.id}`} aria-label={`View ${product.name}`}>
       <div className="card-art" style={{ backgroundColor: product.accent }}>
         <div className="card-orb" aria-hidden="true" />
-        <span className="card-art-emoji" aria-hidden="true">{product.emoji}</span>
+        <Image
+          src={product.image}
+          alt={`${product.name} product illustration`}
+          width={800}
+          height={600}
+          sizes="(max-width: 420px) 100vw, (max-width: 740px) 50vw, (max-width: 1050px) 33vw, 25vw"
+          className="card-product-image"
+        />
         <span className="card-art-tag">SHIPYARD / EDITION 01</span>
       </div>
       <div className="card-info">

@@ -9,11 +9,13 @@ export interface Product {
   accent: string;
   description: string;
   specs: string[];
+  image: string;
 }
 
 export const products: Product[] = [
   {
     id: "wave-runner",
+    image: "/products/wave-runner.svg",
     name: "Wave Runner",
     tagline: "The everyday runner, reimagined.",
     price: 129,
@@ -25,6 +27,7 @@ export const products: Product[] = [
   },
   {
     id: "pulse-buds",
+    image: "/products/pulse-buds.svg",
     name: "Pulse Buds",
     tagline: "Your sound, without the noise.",
     price: 89,
@@ -36,6 +39,7 @@ export const products: Product[] = [
   },
   {
     id: "orbit-watch",
+    image: "/products/orbit-watch.svg",
     name: "Orbit Watch",
     tagline: "A smarter rhythm for every day.",
     price: 219,
@@ -47,6 +51,7 @@ export const products: Product[] = [
   },
   {
     id: "nova-cam",
+    image: "/products/nova-cam.svg",
     name: "Nova Cam",
     tagline: "Big memories, pocket-sized gear.",
     price: 349,
@@ -58,6 +63,7 @@ export const products: Product[] = [
   },
   {
     id: "cloud-step",
+    image: "/products/cloud-step.svg",
     name: "Cloud Step",
     tagline: "Comfort that goes further.",
     price: 115,
@@ -69,6 +75,7 @@ export const products: Product[] = [
   },
   {
     id: "tempo-speaker",
+    image: "/products/tempo-speaker.svg",
     name: "Tempo Speaker",
     tagline: "Fill any space with feeling.",
     price: 149,
@@ -80,6 +87,7 @@ export const products: Product[] = [
   },
   {
     id: "arc-keyboard",
+    image: "/products/arc-keyboard.svg",
     name: "Arc Keyboard",
     tagline: "Make every keystroke count.",
     price: 159,
@@ -91,6 +99,7 @@ export const products: Product[] = [
   },
   {
     id: "flux-band",
+    image: "/products/flux-band.svg",
     name: "Flux Band",
     tagline: "Little habits. Big momentum.",
     price: 69,

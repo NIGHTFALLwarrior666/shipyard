@@ -49,3 +49,13 @@ If `git remote add origin` reports `remote origin already exists`, replace it us
 ## Note
 
 The source package was assembled in an offline environment, so dependencies couldn't be downloaded here and `npm run build` could not be verified in this environment. Please run it locally before submitting.
+
+## Part 2 — Optimization changes (Kalvium 5.14)
+
+- Added eight **local SVG product illustrations** under `public/products/` and an image field to every typed product. Product cards and detail pages render them with `next/image` with intrinsic dimensions, descriptive alt text, and responsive `sizes` to avoid layout shifts. These are original illustrations, not externally sourced product photographs.
+- Self-hosted Inter using `next/font/google` in `app/layout.tsx` (with `display: "swap"`); removed the body font override.
+- Added a below-the-fold interactive product comparison. Its `ComparePanel` chunk is loaded with `next/dynamic` only when its wrapper nears the viewport; loading fallback included.
+- Added homepage `metadata` and retained product-specific async `generateMetadata` with titles and descriptions for every product page.
+- The catalog, eight detail routes, responsive layout, and product data from Part 1 are preserved.
+
+To test before submitting: `npm install`, `npm run dev`, `npm run typecheck`, `npm run lint`, and `npm run build`. This PR intentionally covers Part 2; Lighthouse scores and live deployment belong to Part 3.
