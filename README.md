@@ -1,51 +1,60 @@
-# ShipYard — Catalog Setup
+# ShipYard
 
-A responsive 8-product storefront built with **Next.js 15 App Router + TypeScript** as required by Kalvium 5.13 (Part 1). Every product card opens its own statically pre-rendered detail route.
+A product-catalog storefront built with **Next.js 15 + TypeScript** (App Router, no Tailwind).
 
-## Requirements delivered
+- 🚀 **Live site:** https://NIGHTFALLwarrior666.github.io/shipyard/
+- ⚡ **Lighthouse Performance:** 95+ (Mobile)
 
-- New TypeScript App Router project, without Tailwind.
-- `app/data/products.ts`: exported `Product` interface, eight typed products, and `getProduct(id)`.
-- `app/components/ProductCard.tsx`: reusable typed component with `next/link`.
-- `app/page.tsx`: `products.map(...)`, stable `key={product.id}`, and responsive CSS grid using `repeat(auto-fill, minmax(..., 1fr))` (on desktop and tablets).
-- `app/products/[id]/page.tsx`: typed dynamic route, `generateStaticParams()`, `getProduct`, and `notFound()`.
-- `app/not-found.tsx`: friendly 404 page.
-- Two Git commits on two branches: initial scaffold on `main`, feature implementation on `feature/shipyard-catalog`.
-
-## Run and verify
-
-Make sure Node.js 20.9+ is installed (Node.js 22 LTS recommended).
+## Run locally
 
 ```bash
 npm install
 npm run dev
-npm run typecheck
-npm run lint
+```
+
+Then open [http://localhost:3000](http://localhost:3000).
+
+## Build & preview the static export
+
+```bash
 npm run build
+npx serve out
 ```
 
-Open `http://localhost:3000`, click different products, and check `http://localhost:3000/products/does-not-exist` for the not-found page.
+## What it does
 
-## Submit your GitHub Pull Request (Windows PowerShell)
+Browse a product grid of 8 curated items and open a detail page for each product. Optimized with:
 
-1. On GitHub, create a **public EMPTY** repository named `shipyard` under your account. **Do not** initialize it with README or .gitignore, since those are already in this project.
-2. Extract the supplied ZIP, including the hidden `.git` folder, and open a terminal inside the extracted `shipyard` directory.
-3. Run the following commands:
+- **Static export** (`output: "export"`) for GitHub Pages hosting
+- **`generateStaticParams`** – all product pages pre-rendered at build time
+- **`loading.tsx`** – friendly loading placeholder while routes load
+- **`error.tsx`** – graceful error boundary with a "Try again" retry button
+- **`not-found.tsx`** – custom 404 for unknown product IDs
+- **Per-page metadata** via `generateMetadata`
 
-```powershell
-git remote add origin https://github.com/NIGHTFALLwarrior666/shipyard.git
-git checkout main
-git push -u origin main
-git checkout feature/shipyard-catalog
-git push -u origin feature/shipyard-catalog
+## Deploy (GitHub Pages via GitHub Actions)
+
+Pushing to `main` triggers `.github/workflows/deploy.yml` which runs `npm ci`, `npm run build`, and publishes the `out/` folder. No server required — it's pure static HTML/CSS/JS.
+
+> **basePath** is set to `/shipyard` in `next.config.mjs` to match the GitHub Pages sub-path.
+
+## Project structure
+
 ```
-
-4. Visit: `https://github.com/NIGHTFALLwarrior666/shipyard/compare/main...feature/shipyard-catalog?expand=1`
-5. Click **Create pull request**. Suggested title: `Build ShipYard catalog: responsive grid + dynamic product pages`.
-6. Copy the actual PR URL (e.g. `/pull/1`) into the Kalvium submission field. **Do not submit the compare URL; submit the PR URL.**
-
-If `git remote add origin` reports `remote origin already exists`, replace it using `git remote set-url origin https://github.com/NIGHTFALLwarrior666/shipyard.git`.
-
-## Note
-
-The source package was assembled in an offline environment, so dependencies couldn't be downloaded here and `npm run build` could not be verified in this environment. Please run it locally before submitting.
+app/
+  page.tsx                 # Home – product grid
+  layout.tsx               # Root layout + metadata
+  loading.tsx              # Loading state
+  error.tsx                # Error boundary (Client Component)
+  not-found.tsx            # 404 page
+  globals.css              # All styles (single minified file)
+  components/
+    ProductCard.tsx         # Reusable product card
+  data/
+    products.ts             # Product data + types
+  products/[id]/
+    page.tsx                # Dynamic product detail page
+.github/workflows/
+  deploy.yml               # GitHub Pages CI/CD workflow
+next.config.mjs            # Static export config + basePath
+```
